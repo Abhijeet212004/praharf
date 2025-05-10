@@ -1,13 +1,11 @@
 .quizContainer {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding-top: 40px;
-  padding-bottom: 20px;
-  height: 100vh;
+  padding: 20px 0;
   overflow: hidden;
 }
 
@@ -47,17 +45,17 @@
 }
 
 .quizTitle {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   position: relative;
-  padding: 15px 40px;
+  padding: 8px 25px;
   display: inline-block;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
   color: white;
   background: rgba(0, 0, 0, 0.35);
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
   border: 2px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
@@ -74,8 +72,67 @@
 }
 
 @media (max-width: 480px) {
+  .quizContainer {
+    padding: 10px 0;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  .contentContainer {
+    padding: 5px 15px;
+    gap: 8px;
+    height: auto;
+    padding-bottom: 80px; /* Extra padding to ensure Start button is visible */
+  }
+  
+  .headerSection {
+    margin-bottom: 5px;
+  }
+  
   .quizTitle {
-    font-size: 1.8rem;
-    padding: 10px 25px;
+    font-size: 1.5rem;
+    padding: 8px 15px;
+    margin-bottom: 8px;
+    border-width: 1px;
+  }
+  
+  .mainSection {
+    width: 95%;
+  }
+  
+  .footerSection {
+    margin-top: 5px;
+  }
+  
+  /* Start button for mobile */
+  .startButton {
+    margin-top: 30px;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+  }
+
+  
+  /* Mobile-specific animation for the title */
+  .quizTitle {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .quizTitle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 150%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: skewX(-25deg);
+    animation: titleShimmer 4s infinite;
+  }
+  
+  @keyframes titleShimmer {
+    0% { left: -150%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
   }
 }

@@ -9,9 +9,9 @@
 }
 
 .navigationButton {
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 50px;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -55,4 +55,59 @@
 .submitButton:hover:not(:disabled) {
   background-color: #059669;
   box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .navigationContainer {
+    width: 95%;
+    height: 45px;
+    padding: 0 10px;
+  }
+  
+  .navigationButton {
+    font-size: 0.85rem;
+    padding: 7px 15px;
+    border-radius: 20px;
+    /* Increase touch target area */
+    min-width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Add 3D effect for better visibility */
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    transform: translateY(0);
+    transition: all 0.15s ease;
+  }
+  
+  .navigationButton:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Add icons to buttons on mobile */
+  .prevButton::before {
+    content: '\2190';
+    margin-right: 5px;
+  }
+  
+  .nextButton::after, .submitButton::after {
+    content: '\2192';
+    margin-left: 5px;
+  }
+  
+  /* Subtle pulsing animation for next/submit buttons */
+  @keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  .nextButton:not(:disabled), .submitButton:not(:disabled) {
+    animation: buttonPulse 2s infinite ease-in-out;
+  }
+  
+  .nextButton:disabled, .submitButton:disabled {
+    opacity: 0.4;
+  }
 }

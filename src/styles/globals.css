@@ -5,8 +5,19 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: #243665;
-  overflow-x: hidden;
+  overflow: hidden;
   color: #333;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+@media (max-width: 480px) {
+  body {
+    overflow-y: auto;
+    position: static;
+    min-height: 100vh;
+  }
 }
 
 * {

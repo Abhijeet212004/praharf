@@ -7,13 +7,47 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   padding: 40px;
   margin: 20px 0;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   max-width: 600px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Animations for result card */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Smooth scrollbar styling */
+.resultCard::-webkit-scrollbar {
+  width: 8px;
+}
+
+.resultCard::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.resultCard::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.5);
+  border-radius: 10px;
+}
+
+.resultCard::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.8);
 }
 
 .resultTitle {
@@ -21,6 +55,7 @@
   color: #333;
   margin-bottom: 20px;
   font-weight: 600;
+  animation: fadeInUp 0.6s ease-out 0.1s backwards;
 }
 
 .praharName {
@@ -29,9 +64,14 @@
   color: #3b82f6;
   margin-bottom: 20px;
   padding: 10px 30px;
-  background: rgba(59, 130, 246, 0.1);
-  border-radius: 50px;
-  border: 2px solid rgba(59, 130, 246, 0.2);
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-radius: 30px;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.7s ease-out 0.3s backwards;
 }
 
 .praharDescription {
@@ -39,6 +79,7 @@
   line-height: 1.6;
   color: #4b5563;
   margin-bottom: 30px;
+  animation: fadeInUp 0.7s ease-out 0.5s backwards;
 }
 
 .retakeButton {
@@ -52,10 +93,142 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #3b82f6;
   color: white;
+  animation: fadeInUp 0.7s ease-out 0.9s backwards;
 }
 
 .retakeButton:hover {
   background-color: #2563eb;
   box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
   transform: translateY(-2px);
+}
+
+/* Share section styles */
+.shareSection {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shareTitle {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+  animation: fadeInUp 0.7s ease-out 0.6s backwards;
+}
+
+.shareButtons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.shareButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shareIcon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  fill: currentColor;
+}
+
+.whatsappButton {
+  background-color: #25D366;
+}
+
+.whatsappButton:hover {
+  background-color: #20bd5a;
+}
+
+.instagramButton {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.instagramButton:hover {
+  background: linear-gradient(45deg, #e78b2e 0%, #d05e36 25%, #c9233d 50%, #b72060 75%, #a7167a 100%);
+}
+
+/* Story Share Section */
+.storyShareSection {
+  width: 100%;
+  margin: 25px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: fadeInUp 0.8s ease-out 0.7s backwards;
+}
+
+.shareDescription {
+  font-size: 0.95rem;
+  color: #4b5563;
+  margin-bottom: 15px;
+  text-align: center;
+  max-width: 400px;
+}
+
+/* Mobile styles */
+@media (max-width: 480px) {
+  .resultCard {
+    padding: 25px 15px;
+    border-radius: 16px;
+  }
+  
+  .praharName {
+    font-size: 1.6rem;
+    padding: 8px 20px;
+  }
+  
+  .praharDescription {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .shareButtons {
+    gap: 10px;
+  }
+  
+  .shareButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .shareIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .storyShareSection {
+    padding: 15px 10px;
+    margin: 20px 0;
+  }
+  
+  .shareDescription {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
 }
