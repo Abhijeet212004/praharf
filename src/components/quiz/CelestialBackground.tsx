@@ -99,7 +99,7 @@ const CelestialBackground: React.FC<CelestialBackgroundProps> = ({ progress }) =
     
 
     const clouds = cloudsRef.current;
-    let cloudOpacity;
+    let cloudOpacity: number;
     
     if (progress < 0.2) {
       cloudOpacity = progress * 5;
@@ -120,7 +120,7 @@ const CelestialBackground: React.FC<CelestialBackgroundProps> = ({ progress }) =
 
     if (starsContainerRef.current) {
       const stars = starsContainerRef.current.querySelectorAll(`.${styles.star}`);
-      let starOpacity;
+      let starOpacity: number;
       
       if (progress < 0.5) {
         starOpacity = 0;
