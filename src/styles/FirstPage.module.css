@@ -1,0 +1,210 @@
+.skyContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url('/images/firstPage_bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.circleContainer {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background: #fff8e1;
+  border-radius: 50%;
+  box-shadow: 1px 12px 30px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.3rem;
+  font-weight: 700;
+  color: black;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: scaleY(0.85); 
+  padding-inline: 40px;
+	padding-top: 40px;
+  text-align: center;
+}
+
+.description {
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: black;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	margin-top: 30px;;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.startButton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -20px;
+  padding: 20px 60px;
+  border-radius: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  background-color: #a8ddf0;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.startButton:hover {
+  background-color: #7ecbe3;
+	transform: translate(-50%, -10px);
+}
+
+.clockIcon, .hourglassIcon, .sunIcon, .moonIcon {
+  position: absolute;
+}
+
+.clockIcon {
+  width: 190px;
+  top: -40px;
+  left: -15px;
+}
+
+.hourglassIcon {
+  height: 180px;
+  top: -30px;
+  right: 75px;
+}
+
+.sunIcon {
+  width: 160px;
+  bottom: 120px;
+  left: -80px;
+}
+
+.moonIcon {
+  width: 130px;
+  bottom: 120px;
+  right: -50px;
+}
+
+@media (max-width: 768px) {
+  .circleContainer {
+    width: 350px;
+    height: 350px;
+    padding: 40px 20px;
+  }
+
+  .title {
+    font-size: 2.4rem;
+    padding: 0 20px;
+  }
+
+  .description {
+    font-size: 1.2rem;
+    padding: 0 20px;
+		margin-top: 0;
+  }
+
+  .startButton {
+    padding: 16px 28px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .circleContainer {
+    width: 300px;
+    height: 300px;
+    padding: 30px 15px;
+  }
+
+  .title {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+
+  .description {
+    font-size: 1.05rem;
+    padding: 0 10px;
+  }
+
+  .startButton {
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .clockIcon,
+  .hourglassIcon,
+  .sunIcon,
+  .moonIcon {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .clockIcon {
+    width: 120px;
+    top: -30px;
+    left: -10px;
+  }
+
+  .hourglassIcon {
+    height: 110px;
+    top: -20px;
+    right: 50px;
+  }
+
+  .sunIcon {
+    width: 100px;
+    bottom: 100px;
+    left: -50px;
+  }
+
+  .moonIcon {
+    width: 80px;
+    bottom: 100px;
+    right: -30px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .clockIcon {
+    width: 90px;
+    top: -20px;
+    left: -5px;
+  }
+
+  .hourglassIcon {
+    height: 85px;
+    top: -15px;
+    right: 35px;
+  }
+
+  .sunIcon {
+    width: 75px;
+    bottom: 90px;
+    left: -30px;
+  }
+
+  .moonIcon {
+    width: 60px;
+    bottom: 90px;
+    right: -20px;
+  }
+}
