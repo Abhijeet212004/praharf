@@ -2,11 +2,23 @@ import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@/styles/CelestialBackground.module.css';
 
+// Import Prahar background images
+import prahar1Bg from '@/assets/prahar1.jpeg';
+import prahar2Bg from '@/assets/prahar2.jpeg';
+import prahar3Bg from '@/assets/prahar3.jpeg';
+import prahar4Bg from '@/assets/prahar4.jpeg';
+import prahar5Bg from '@/assets/prahar5.jpeg';
+import prahar6Bg from '@/assets/prahar6.jpeg';
+import prahar7Bg from '@/assets/prahar7.jpeg';
+import prahar8Bg from '@/assets/prahar8.jpeg';
+
 interface CelestialBackgroundProps {
   progress: number;
+  showResult?: boolean;
+  resultPraharId?: number | null;
 }
 
-const CelestialBackground: React.FC<CelestialBackgroundProps> = ({ progress }) => {
+const CelestialBackground: React.FC<CelestialBackgroundProps> = ({ progress, showResult = false, resultPraharId = null }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const starsContainerRef = useRef<HTMLDivElement>(null);
   const sunRef = useRef<HTMLDivElement>(null);
@@ -47,8 +59,56 @@ const CelestialBackground: React.FC<CelestialBackgroundProps> = ({ progress }) =
 
 
   useEffect(() => {
-    updateCelestialElements(progress);
-  }, [progress]);
+    if (showResult && resultPraharId) {
+      // If showing result, set the background based on the prahar ID
+      updateBackgroundForPraharResult(resultPraharId);
+    } else {
+      // Otherwise use the normal progress-based background
+      updateCelestialElements(progress);
+    }
+  }, [progress, showResult, resultPraharId]);
+
+  // Function to update background for result page based on prahar ID
+  const updateBackgroundForPraharResult = (praharId: number) => {
+    if (!containerRef.current) return;
+    
+    const container = containerRef.current;
+    
+    // Hide celestial elements for the result page
+    if (sunRef.current) sunRef.current.style.opacity = '0';
+    if (moonRef.current) moonRef.current.style.opacity = '0';
+    if (cloudsRef.current) {
+      cloudsRef.current.forEach(cloud => {
+        cloud.style.opacity = '0';
+      });
+    }
+    if (starsContainerRef.current) {
+      const stars = starsContainerRef.current.querySelectorAll(`.${styles.star}`);
+      stars.forEach(star => {
+        (star as HTMLElement).style.opacity = '0';
+      });
+    }
+    
+    // Set background image based on prahar ID
+    let backgroundImage;
+    switch(praharId) {
+      case 1: backgroundImage = `url(${prahar1Bg.src})`; break;
+      case 2: backgroundImage = `url(${prahar2Bg.src})`; break;
+      case 3: backgroundImage = `url(${prahar3Bg.src})`; break;
+      case 4: backgroundImage = `url(${prahar4Bg.src})`; break;
+      case 5: backgroundImage = `url(${prahar5Bg.src})`; break;
+      case 6: backgroundImage = `url(${prahar6Bg.src})`; break;
+      case 7: backgroundImage = `url(${prahar7Bg.src})`; break;
+      case 8: backgroundImage = `url(${prahar8Bg.src})`; break;
+      default: backgroundImage = `url(${prahar1Bg.src})`;
+    }
+    
+    // Apply the background image
+    container.style.backgroundImage = backgroundImage;
+    container.style.backgroundSize = 'cover';
+    container.style.backgroundPosition = 'center';
+    container.style.backgroundColor = 'transparent';
+  };
 
   const updateCelestialElements = (progress: number) => {
 

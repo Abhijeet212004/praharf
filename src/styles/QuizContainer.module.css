@@ -1,12 +1,15 @@
 .quizContainer {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 0;
-  overflow: hidden;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: transparent;
 }
 
 .contentContainer {
@@ -15,9 +18,13 @@
   align-items: center;
   width: 100%;
   max-width: 800px;
-  padding: 10px 20px;
+  padding: 0;
+  margin: 0;
   z-index: 2;
   gap: 15px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 /* Flexible sections that adapt to content */
@@ -27,6 +34,8 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  padding: 0;
+  background: transparent;
 }
 
 .mainSection {
@@ -34,6 +43,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0;
+  background: transparent;
 }
 
 .footerSection {
@@ -42,6 +55,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  background: transparent;
 }
 
 .quizTitle {
@@ -65,9 +79,23 @@
 
 
 @media (max-width: 768px) {
+  .quizContainer {
+    padding: 15px 0;
+    overflow-y: auto;
+  }
+  
+  .contentContainer {
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  
   .quizTitle {
     font-size: 2.2rem;
     padding: 12px 30px;
+  }
+  
+  .mainSection {
+    overflow-y: auto;
   }
 }
 
@@ -76,13 +104,14 @@
     padding: 10px 0;
     height: auto;
     min-height: 100vh;
+    overflow-y: auto;
   }
   
   .contentContainer {
     padding: 5px 15px;
     gap: 8px;
     height: auto;
-    padding-bottom: 80px; /* Extra padding to ensure Start button is visible */
+    padding-bottom: 100px; /* Extra padding to ensure Start button is visible */
   }
   
   .headerSection {
@@ -102,6 +131,8 @@
   
   .footerSection {
     margin-top: 5px;
+    width: 100%;
+    position: relative;
   }
   
   /* Start button for mobile */
@@ -110,9 +141,10 @@
     padding: 12px 30px;
     font-size: 1.1rem;
   }
+}
 
-  
-  /* Mobile-specific animation for the title */
+/* Mobile-specific animation for the title */
+@media (max-width: 480px) {
   .quizTitle {
     position: relative;
     overflow: hidden;
@@ -129,10 +161,11 @@
     transform: skewX(-25deg);
     animation: titleShimmer 4s infinite;
   }
-  
-  @keyframes titleShimmer {
-    0% { left: -150%; }
-    50% { left: 150%; }
-    100% { left: 150%; }
-  }
 }
+
+@keyframes titleShimmer {
+  0% { left: -150%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
+}
+

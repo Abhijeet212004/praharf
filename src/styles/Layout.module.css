@@ -2,6 +2,9 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
 }
 
 .main {
@@ -13,6 +16,20 @@
   padding: 40px 20px;
   position: relative;
   z-index: 1;
+  width: 100%;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 30px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    padding: 20px 10px;
+  }
 }
 
 .footer {

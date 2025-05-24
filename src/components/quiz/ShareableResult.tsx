@@ -3,16 +3,40 @@ import html2canvas from 'html2canvas';
 import { PraharInfo } from '@/data/quizData';
 import styles from '@/styles/ShareableResult.module.css';
 
+// Import the prahar card images
+import praharCard1 from '@/assets/praharcard1.jpeg';
+import praharCard2 from '@/assets/praharcard2.jpeg';
+import praharCard3 from '@/assets/praharcard3.jpeg';
+import praharCard4 from '@/assets/praharcard4.jpeg';
+import praharCard5 from '@/assets/praharcard5.jpeg';
+import praharCard6 from '@/assets/praharcard6.jpeg';
+import praharCard7 from '@/assets/praharcard7.jpeg';
+import praharCard8 from '@/assets/praharcard8.jpeg';
+
 interface ShareableResultProps {
   praharInfo: PraharInfo;
 }
 
 const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
   const resultCardRef = useRef<HTMLDivElement>(null);
-  const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const [showScreenshotInstructions, setShowScreenshotInstructions] = useState(false);
   const [baseUrl, setBaseUrl] = useState('');
+  
+  // Get the appropriate prahar card image based on prahar id
+  const getPraharCard = () => {
+    switch(praharInfo.id) {
+      case 1: return praharCard1;
+      case 2: return praharCard2;
+      case 3: return praharCard3;
+      case 4: return praharCard4;
+      case 5: return praharCard5;
+      case 6: return praharCard6;
+      case 7: return praharCard7;
+      case 8: return praharCard8;
+      default: return praharCard1;
+    }
+  };
 
   useEffect(() => {
     // Get base URL for sharing
@@ -21,72 +45,15 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
     }
   }, []);
 
-  const generateImage = async (): Promise<string | null> => {
-    if (!resultCardRef.current) return null;
-    
-    try {
-      setIsGenerating(true);
-      
-      // Create a clone of the card to modify without affecting the original
-      const originalCard = resultCardRef.current;
-      const clonedCard = originalCard.cloneNode(true) as HTMLElement;
-      
-      // Temporarily add the clone to the DOM but make it invisible
-      clonedCard.style.position = 'absolute';
-      clonedCard.style.left = '-9999px';
-      clonedCard.style.top = '-9999px';
-      document.body.appendChild(clonedCard);
-      
-      // Fix all gradient text elements in the clone
-      const gradientElements = clonedCard.querySelectorAll('[class*="praharName"], [class*="logo"], [class*="title"]');
-      gradientElements.forEach((el) => {
-        // Force solid color text instead of gradient
-        (el as HTMLElement).style.background = 'none';
-        (el as HTMLElement).style.webkitBackgroundClip = 'unset';
-        (el as HTMLElement).style.backgroundClip = 'unset';
-        (el as HTMLElement).style.webkitTextFillColor = 'white';
-        (el as HTMLElement).style.color = 'white';
-        (el as HTMLElement).style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.5)';
-      });
-      
-      // Capture the modified clone
-      const canvas = await html2canvas(clonedCard, {
-        scale: 2, // Higher resolution
-        backgroundColor: null,
-        logging: false,
-        useCORS: true,
-        allowTaint: true,
-        onclone: (clonedDoc) => {
-          // Additional fixes that might be needed in the cloned document
-          const clonedElements = clonedDoc.querySelectorAll('[class*="praharName"], [class*="logo"], [class*="title"]');
-          clonedElements.forEach((el) => {
-            (el as HTMLElement).style.background = 'none';
-            (el as HTMLElement).style.color = 'white';
-            (el as HTMLElement).style.webkitTextFillColor = 'white';
-          });
-        }
-      });
-      
-      // Remove the clone from the DOM
-      document.body.removeChild(clonedCard);
-      
-      // Create the image data
-      const dataUrl = canvas.toDataURL('image/png');
-      setGeneratedImageUrl(dataUrl);
-      setIsGenerating(false);
-      return dataUrl;
-    } catch (error) {
-      console.error('Error generating image:', error);
-      setIsGenerating(false);
-      return null;
-    }
+  // Helper function to convert prahar card to downloadable format
+  const getCardImageUrl = (): string => {
+    // Return the src of the prahar card image
+    return getPraharCard().src;
   };
 
   const saveAndRedirectToInstagram = async () => {
-    // Generate the image first to make sure it's ready for screenshot
-    if (!generatedImageUrl) {
-      await generateImage();
-    }
+    // First download the image
+    await downloadImage();
     
     // Show instructions and immediately scroll to the very top
     setShowScreenshotInstructions(true);
@@ -113,24 +80,17 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
   };
 
   const shareToWhatsApp = async () => {
-    // Generate the image if not already generated
-    const imageUrl = generatedImageUrl || await generateImage();
-    
-    if (!imageUrl) {
-      alert('Failed to generate image. Please try again.');
-      return;
-    }
-    
+    const imageUrl = getCardImageUrl();
     const shareMessage = `I discovered my Prahar personality type: ${praharInfo.name}! Take the quiz to find yours: ${baseUrl}`;
     const imageName = `My-Prahar-Type-${praharInfo.name.replace(/\s+/g, '-')}.png`;
 
     try {
       // Try to use Web Share API (modern browsers & mobile)
       if (navigator.share && navigator.canShare) {
-        // Convert base64 data URL to a blob
+        // Convert prahar card to a blob
         const response = await fetch(imageUrl);
         const blob = await response.blob();
-        const file = new File([blob], imageName, { type: 'image/png' });
+        const file = new File([blob], imageName, { type: 'image/jpeg' });
         
         // Check if we can share files
         if (navigator.canShare({ files: [file] })) {
@@ -149,13 +109,8 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
     
     // Fallback: Save the image and open WhatsApp with text
     try {
-      // First save the image to device
-      const link = document.createElement('a');
-      link.href = imageUrl;
-      link.download = imageName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      // First download the image
+      await downloadImage();
       
       // Then open WhatsApp
       setTimeout(() => {
@@ -176,22 +131,24 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
   };
   
   const downloadImage = async () => {
-    const imageUrl = generatedImageUrl || await generateImage();
-    
-    if (!imageUrl) {
-      alert('Failed to generate image. Please try again.');
-      return;
+    setIsDownloading(true);
+    try {
+      const imageUrl = getCardImageUrl();
+      
+      // Create a temporary link element to download the image
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.download = `My-Prahar-Type-${praharInfo.name.replace(/\s+/g, '-')}.jpeg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      alert('Prahar card saved to your device! You can share it on any platform you like.');
+    } catch (error) {
+      console.error('Error downloading image:', error);
+      alert('There was a problem downloading the image. Please try again.');
     }
-    
-    // Create a temporary link element to download the image
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `My-Prahar-Type-${praharInfo.name.replace(/\s+/g, '-')}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    
-    alert('Image saved to your device! You can share it on any platform you like.');
+    setIsDownloading(false);
   };
 
   return (
@@ -215,22 +172,13 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
         </div>
       )}
       
-      {/* Result card that will be captured as an image */}
-      <div className={styles.shareableCard} ref={resultCardRef}>
-        <div className={styles.cardHeader}>
-          <div className={styles.logo}>Prahar Quiz</div>
-          <div className={styles.resultTitle}>My Personality Type</div>
-        </div>
-        
-        <div className={styles.resultContent}>
-          <div className={styles.praharName}>{praharInfo.name}</div>
-          <div className={styles.praharDescription}>
-            {praharInfo.description.length > 200 
-              ? `${praharInfo.description.substring(0, 200)}...` 
-              : praharInfo.description}
-          </div>
-        </div>
-        
+      {/* Display the prahar card image */}
+      <div className={styles.praharCardContainer} ref={resultCardRef}>
+        <img 
+          src={getPraharCard().src} 
+          alt={`${praharInfo.name} prahar card`} 
+          className={styles.praharCardImage} 
+        />
         <div className={styles.cardFooter}>
           <div className={styles.websiteUrl}>{baseUrl || 'prahar-quiz.com'}</div>
         </div>
@@ -241,27 +189,27 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
         <button 
           className={`${styles.shareStoryButton} ${styles.instagramScreenshotButton}`}
           onClick={saveAndRedirectToInstagram}
-          disabled={isGenerating}
+          disabled={isDownloading}
         >
-          {isGenerating ? (
+          {isDownloading ? (
             <div className={styles.loadingSpinner}></div>
           ) : (
             <>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className={styles.shareIcon}>
                 <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
               </svg>
-              Screenshot for Instagram
+              Share to Instagram
             </>
           )}
         </button>
         
         {/* WhatsApp Share Button */}
         <button 
-          className={`${styles.shareStoryButton} ${styles.whatsappButton}`}
+          className={`${styles.shareStoryButton} ${styles.whatsappButton}`} 
           onClick={shareToWhatsApp}
-          disabled={isGenerating}
+          disabled={isDownloading}
         >
-          {isGenerating ? (
+          {isDownloading ? (
             <div className={styles.loadingSpinner}></div>
           ) : (
             <>
@@ -273,27 +221,23 @@ const ShareableResult: React.FC<ShareableResultProps> = ({ praharInfo }) => {
           )}
         </button>
         
-        {/* Save image button */}
+        {/* Direct Download Button */}
         <button 
-          className={`${styles.shareStoryButton} ${styles.downloadButton}`}
+          className={`${styles.shareStoryButton} ${styles.downloadButton}`} 
           onClick={downloadImage}
-          disabled={isGenerating}
+          disabled={isDownloading}
         >
-          {isGenerating ? (
-            <span>Generating...</span>
+          {isDownloading ? (
+            <div className={styles.loadingSpinner}></div>
           ) : (
             <>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className={styles.shareIcon}>
                 <path d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"/>
               </svg>
-              Download Image
+              Download Card
             </>
           )}
         </button>
-      </div>
-      
-      <div className={styles.shareInstructions}>
-        <p>"Screenshot for Instagram" will show instructions for taking a screenshot and redirect you to Instagram.</p>
       </div>
     </div>
   );

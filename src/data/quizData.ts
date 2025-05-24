@@ -67,43 +67,43 @@ export interface PraharInfo {
 export const praharInfo: Record<number, PraharInfo> = {
   1: {
     id: 1,
-    name: "Pratham Prahar (Dawn Prahar)",
-    description: "You are aligned with the Pratham Prahar, representing new beginnings, fresh energy, and spiritual awakening."
+    name: "Prath Prahar",
+    description: "You are aligned with the Prath Prahar, representing new beginnings, fresh energy, and spiritual awakening."
   },
   2: {
     id: 2,
-    name: "Dwitiya Prahar (Morning Prahar)",
-    description: "You embody the Dwitiya Prahar, characterized by clear thinking, productivity, and steady growth."
+    name: "Sang Prahar",
+    description: "You embody the Sang Prahar, characterized by clear thinking, productivity, and steady growth."
   },
   3: {
     id: 3,
-    name: "Tritiya Prahar (Midday Prahar)",
-    description: "You resonate with the Tritiya Prahar, symbolizing peak energy, clarity of purpose, and full expression."
+    name: "Madhayan Prahar",
+    description: "You resonate with the Madhayan Prahar, symbolizing peak energy, clarity of purpose, and full expression."
   },
   4: {
     id: 4,
-    name: "Chaturtha Prahar (Afternoon Prahar)",
-    description: "You connect with the Chaturtha Prahar, representing transition, reflection, and balanced wisdom."
+    name: "Apar Prahar",
+    description: "You connect with the Apar Prahar, representing transition, reflection, and balanced wisdom."
   },
   5: {
     id: 5,
-    name: "Panchama Prahar (Evening Prahar)",
-    description: "You align with the Panchama Prahar, characterized by introspection, winding down, and deeper awareness."
+    name: "Sankal Prahar",
+    description: "You align with the Sankal Prahar, characterized by introspection, winding down, and deeper awareness."
   },
   6: {
     id: 6,
-    name: "Shashtha Prahar (Dusk Prahar)",
-    description: "You embody the Shashtha Prahar, symbolizing the integration of day's learnings and peaceful transition."
+    name: "Pradosh Prahar",
+    description: "You embody the Pradosh Prahar, symbolizing the integration of day's learnings and peaceful transition."
   },
   7: {
     id: 7,
-    name: "Saptama Prahar (Night Prahar)",
-    description: "You resonate with the Saptama Prahar, representing rest, rejuvenation, and subconscious exploration."
+    name: "Nishit Prahar",
+    description: "You resonate with the Nishit Prahar, representing rest, rejuvenation, and subconscious exploration."
   },
   8: {
     id: 8,
-    name: "Ashtama Prahar (Deep Night Prahar)",
-    description: "You connect with the Ashtama Prahar, characterized by deep stillness, mystical awareness, and renewal."
+    name: "Usha Kal Prahar",
+    description: "You connect with the Usha Kal Prahar, characterized by deep stillness, mystical awareness, and renewal."
   }
 };
 

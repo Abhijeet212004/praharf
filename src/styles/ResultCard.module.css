@@ -1,23 +1,27 @@
 .resultCard {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  padding: 40px;
-  margin: 20px 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  margin: 20px auto;
   transition: all 0.3s ease;
   max-width: 600px;
-  width: 100%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   animation: fadeIn 0.6s ease-out;
+  position: relative;
+  z-index: 5;
 }
 
 /* Animations for result card */
@@ -50,36 +54,67 @@
   background: rgba(139, 92, 246, 0.8);
 }
 
+.cardImageContainer {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.praharCardImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.5s ease;
+}
+
+.praharCardImage:hover {
+  transform: scale(1.03);
+}
+
 .resultTitle {
   font-size: 1.5rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 20px;
   font-weight: 600;
-  animation: fadeInUp 0.6s ease-out 0.1s backwards;
+  animation: fadeInUp 0.6s ease-out 0.3s backwards;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .praharName {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  color: #3b82f6;
+  color: #ffffff;
   margin-bottom: 20px;
   padding: 10px 30px;
-  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
   border-radius: 30px;
   position: relative;
   z-index: 1;
-  animation: fadeInUp 0.7s ease-out 0.3s backwards;
+  animation: fadeInUp 0.7s ease-out 0.5s backwards;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .praharDescription {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #4b5563;
+  color: #ffffff;
   margin-bottom: 30px;
-  animation: fadeInUp 0.7s ease-out 0.5s backwards;
+  animation: fadeInUp 0.7s ease-out 0.7s backwards;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 90%;
 }
 
 .retakeButton {
@@ -90,10 +125,12 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background-color: #3b82f6;
   color: white;
   animation: fadeInUp 0.7s ease-out 0.9s backwards;
+  margin-top: 10px;
+  z-index: 2;
 }
 
 .retakeButton:hover {
@@ -113,10 +150,11 @@
 
 .shareTitle {
   font-size: 1.2rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 15px;
   font-weight: 600;
   animation: fadeInUp 0.7s ease-out 0.6s backwards;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .shareButtons {
@@ -176,7 +214,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
   padding: 20px;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -185,17 +223,49 @@
 
 .shareDescription {
   font-size: 0.95rem;
-  color: #4b5563;
+  color: #f0f0f0;
   margin-bottom: 15px;
   text-align: center;
   max-width: 400px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Tablet styles */
+@media (max-width: 768px) {
+  .resultCard {
+    padding: 25px 20px;
+    max-height: 75vh;
+  }
+  
+  .cardImageContainer {
+    max-width: 280px;
+    margin-bottom: 15px;
+  }
+  
+  .praharName {
+    font-size: 1.8rem;
+    padding: 8px 25px;
+  }
+  
+  .praharDescription {
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+  }
 }
 
 /* Mobile styles */
 @media (max-width: 480px) {
   .resultCard {
-    padding: 25px 15px;
+    padding: 20px 15px;
     border-radius: 16px;
+    max-height: 75vh;
+    margin: 15px auto;
+    overflow-y: auto;
+  }
+  
+  .cardImageContainer {
+    max-width: 240px;
+    margin-bottom: 12px;
   }
   
   .praharName {

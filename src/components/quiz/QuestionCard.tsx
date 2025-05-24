@@ -17,25 +17,36 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   questionNumber = 1,
   totalQuestions = 10
 }) => {
+  // Determine if we should use white text styling (after question 5)
+  const useWhiteText = questionNumber > 5;
+  
   return (
-    <div className={styles.questionCard}>
-      <h2 className={styles.questionText}>{question.question}</h2>
+    <>
+      <h2 className={`${styles.questionText} ${useWhiteText ? styles.whiteText : ''}`}>
+        {question.question}
+      </h2>
       
       <div className={styles.optionsList}>
         {question.options.map((option, index) => (
           <div 
             key={index}
-            className={`${styles.optionItem} ${selectedAnswer === index ? styles.selected : ''}`}
+            className={`
+              ${styles.optionItem} 
+              ${selectedAnswer === index ? styles.selected : ''}
+              ${useWhiteText ? styles.whiteOption : ''}
+            `}
             onClick={() => onAnswerSelect(index)}
           >
-            <div className={styles.optionLetter}>
+            <div className={`${styles.optionLetter} ${useWhiteText ? styles.whiteLetter : ''}`}>
               {['A', 'B', 'C', 'D'][index]}
             </div>
-            <div className={styles.optionText}>{option}</div>
+            <div className={`${styles.optionText} ${useWhiteText ? styles.whiteText : ''}`}>
+              {option}
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

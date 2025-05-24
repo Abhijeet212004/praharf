@@ -87,7 +87,11 @@ const QuizContainer: React.FC = () => {
   
   return (
     <div className={styles.quizContainer}>
-      <CelestialBackground progress={progress} />
+      <CelestialBackground 
+        progress={progress} 
+        showResult={showResult}
+        resultPraharId={resultPraharId}
+      />
       
       <div className={styles.contentContainer}>
         {/* Header Section */}
