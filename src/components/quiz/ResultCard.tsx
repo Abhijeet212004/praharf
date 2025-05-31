@@ -5,14 +5,14 @@ import Image from 'next/image';
 import ShareableResult from './ShareableResult';
 
 // Import custom prahar card images
-import praharCard1 from '@/assets/praharcard1.jpeg';
-import praharCard2 from '@/assets/praharcard2.jpeg';
-import praharCard3 from '@/assets/praharcard3.jpeg';
-import praharCard4 from '@/assets/praharcard4.jpeg';
-import praharCard5 from '@/assets/praharcard5.jpeg';
-import praharCard6 from '@/assets/praharcard6.jpeg';
-import praharCard7 from '@/assets/praharcard7.jpeg';
-import praharCard8 from '@/assets/praharcard8.jpeg';
+import praharCard1 from '@/assets/praharcard1.jpg';
+import praharCard2 from '@/assets/praharcard2.jpg';
+import praharCard3 from '@/assets/praharcard3.jpg';
+import praharCard4 from '@/assets/praharcard4.jpg';
+import praharCard5 from '@/assets/praharcard5.jpg';
+import praharCard6 from '@/assets/praharcard6.jpg';
+import praharCard7 from '@/assets/praharcard7.jpg';
+import praharCard8 from '@/assets/praharcard8.jpg';
 
 interface ResultCardProps {
   praharInfo: PraharInfo;
