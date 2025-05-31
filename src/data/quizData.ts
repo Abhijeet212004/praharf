@@ -67,43 +67,43 @@ export interface PraharInfo {
 export const praharInfo: Record<number, PraharInfo> = {
   1: {
     id: 1,
-    name: "Prath Prahar",
-    description: "You are aligned with the Prath Prahar, representing new beginnings, fresh energy, and spiritual awakening."
+    name: "Usha",
+    description: "You are aligned with Usha, the divine dawn that marks new beginnings. This prahar represents awakening consciousness, fresh possibilities, and the serene energy of early morning. A time of purity and spiritual connection."
   },
   2: {
     id: 2,
-    name: "Sang Prahar",
-    description: "You embody the Sang Prahar, characterized by clear thinking, productivity, and steady growth."
+    name: "Purvanha",
+    description: "You embody Purvanha, the energetic morning period of productivity and clarity. This prahar signifies steady growth, focused intention, and building momentum. A time when your analytical abilities and creative expression are in harmony."
   },
   3: {
     id: 3,
-    name: "Madhayan Prahar",
-    description: "You resonate with the Madhayan Prahar, symbolizing peak energy, clarity of purpose, and full expression."
+    name: "Madhyaha",
+    description: "You resonate with Madhyaha, the powerful midday zenith of vitality. This prahar symbolizes peak energy, full illumination, and decisive action. A time of maximum brightness when achievements reach their highest potential."
   },
   4: {
     id: 4,
-    name: "Apar Prahar",
-    description: "You connect with the Apar Prahar, representing transition, reflection, and balanced wisdom."
+    name: "Aparanha",
+    description: "You connect with Aparanha, the afternoon period of transition and balance. This prahar represents reflection, integration of experiences, and practical wisdom. A time of measured energy that blends activity with contemplation."
   },
   5: {
     id: 5,
-    name: "Sankal Prahar",
-    description: "You align with the Sankal Prahar, characterized by introspection, winding down, and deeper awareness."
+    name: "Sanyankal",
+    description: "You align with Sanyankal, the sunset period of transformation and beauty. This prahar characterizes introspection, the completion of daily cycles, and deeper emotional awareness. A time when outer activities give way to inner contemplation."
   },
   6: {
     id: 6,
-    name: "Pradosh Prahar",
-    description: "You embody the Pradosh Prahar, symbolizing the integration of day's learnings and peaceful transition."
+    name: "Pradosh",
+    description: "You embody Pradosh, the evening twilight of mystery and transition. This prahar symbolizes the integration of day's lessons and the preparation for rest. A sacred time when the veil between worlds thins, inviting spiritual practices."
   },
   7: {
     id: 7,
-    name: "Nishit Prahar",
-    description: "You resonate with the Nishit Prahar, representing rest, rejuvenation, and subconscious exploration."
+    name: "Nishith",
+    description: "You resonate with Nishith, the midnight hour of stillness and depth. This prahar represents deep meditation, subconscious exploration, and rejuvenation. A powerful time of transformation when intuition and mystical insights are heightened."
   },
   8: {
     id: 8,
-    name: "Usha Kal Prahar",
-    description: "You connect with the Usha Kal Prahar, characterized by deep stillness, mystical awareness, and renewal."
+    name: "Triyama",
+    description: "You connect with Triyama, the pre-dawn period of profound silence and potential. This prahar characterizes regeneration, the synthesis of dream wisdom, and preparation for rebirth. A time of sacred darkness that precedes the coming light."
   }
 };
 

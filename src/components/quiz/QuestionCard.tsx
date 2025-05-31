@@ -17,8 +17,8 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   questionNumber = 1,
   totalQuestions = 10
 }) => {
-  // Determine if we should use white text styling (after question 5)
-  const useWhiteText = questionNumber > 5;
+  // Determine if we should use white text styling (for questions 1-3 and after question 5)
+  const useWhiteText = questionNumber <= 3 || questionNumber > 5;
   
   return (
     <>
