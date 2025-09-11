@@ -63,7 +63,7 @@ const Home: NextPage = () => {
       <div className={styles.skyContainer}>
       <div className={styles.circleContainer}>
           <img src="/images/clock.png" className={styles.clockIcon} />
-          <img src="/images/hourglass.png" className={styles.hourglassIcon} />
+          <img src="/images/hourGlass.png" className={styles.hourglassIcon} />
           <img src="/images/sun.png" className={styles.sunIcon} />
           <img src="/images/moon.png" className={styles.moonIcon} />
 
